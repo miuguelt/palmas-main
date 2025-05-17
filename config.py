@@ -1,18 +1,18 @@
 import os
 import secrets
-from dotenv import load_dotenv
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 
 class Config:
-    DB_USER = "alejandro"
-    DB_PASSWORD = "Seyerreyes27_" #os.environ.get("DB_PASS")
-    DB_HOST = "38.242.137.70" #os.environ.get("DB_HOST")
-    raw_port = "3311" #os.environ.get("DB_PORT")
+    DB_USER = os.environ.get("DB_USER") #"alejandrobd"
+    DB_PASSWORD = os.environ.get("DB_PASS")  
+    DB_HOST = os.environ.get("DB_HOST")#"38.242.137.70" 
+    raw_port = os.environ.get("DB_PORT")
     if not raw_port or raw_port == "{DB_PORT}":
         DB_PORT = "3311"
     else:
         DB_PORT = raw_port
-    DB_NAME = "alejandrobd"#os.environ.get("DB_NAME")
+    DB_NAME = os.environ.get("DB_NAME") 
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = secrets.token_urlsafe(24)
