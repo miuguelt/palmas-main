@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito de Compras</title>
+  <!-- Estilos -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='all.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='icons/icon.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='carrito/index.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <!-- Botón de Hamburguesa -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Contenedor del Menú -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center flex-column flex-lg-row">
+                    <li class="nav-item mb-2 mb-lg-0 me-lg-3">
+                        <a class="nav-link text-white d-flex align-items-center" href="{{ url_for('productos.index') }}">
+                            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;">
+                        </a>
+                    </li>
+                    {% if current_user.rolUser == 'administrador' %}
+                        <li class="nav-item dropdown mb-2 mb-lg-0 me-lg-3 w-100 w-lg-auto">
+                            <a class="nav-link dropdown-toggle text-white d-flex align-items-center justify-content-between" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="material-icons me-1">account_circle</i>
+                                <span class="d-none d-lg-inline">Administrador</span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item d-flex justify-content-between align-items-center"
+                                    href="{{ url_for('facturacion.facturas_index') }}">
+                                    Facturas
+                                    {% if pendientes_facturas > 0 %} 
+                                        <span class="badge bg-danger">{{ pendientes_facturas }}</span>
+                                    {% endif %}
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ url_for('categoria.index') }}">Categorías</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('auth.dashboard') }}">Usuarios Registrados</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('productos.index_ejemplo') }}">Zapatos</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+
+                </ul>
+                <ul class="navbar-nav ms-auto align-items-center flex-column flex-lg-row">
+                    <li class="nav-item d-flex align-items-center mb-2 mb-lg-0 me-lg-3">
+                      <a class="nav-link text-white d-flex align-items-center justify-content-center justify-content-lg-start" href="{{ url_for('carrito.index') }}">
+                        <i class="material-icons me-1">shopping_cart</i>
+                        <span id="cart-count" class="badge bg-danger ms-1">
+                          {% if data %}{{ data|length }}{% else %}0{% endif %}
+                        </span>
+                      </a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center mb-2 mb-lg-0 me-lg-3">
+                        <span class="navbar-text text-white">{{ current_user.nameUser }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('auth.logout') }}" class="btn btn-danger d-flex align-items-center flex-nowrap">
+                          <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+      <h2 class="text-center">🛒 Mi Carrito</h2>
+      
+      {% if data %}
+        <table class="table table-striped align-middle">
+          <thead>
+            <tr>
+
+              <th class="select-col">
+                <input type="checkbox" id="select-all" class="form-check-input"> Elegir
+              </th>
+              <th>Imagen</th>
+              <th>Producto</th>
+              <th>Talla</th>
+              <th>Cantidad</th>
+              <th>Precio Unitario</th>
+              <th>Total</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in data %}
+            <tr data-id="{{ item.idCarrito }}" data-producto-id="{{ item.producto.idProducto }}" data-precio="{{ item.producto.precioProducto }}"><td class="select-col">
+                <input type="checkbox" class="select-product">
+              </td>
+              <td>
+                <img src="{{ url_for('static', filename=item.producto.imagenProducto) }}" 
+                    alt="Imagen del producto" class="product-image">
+              </td>
+              <td>{{ item.producto.nombreProducto }}</td>
+              <!-- NUEVO: Campo editable de talla -->
+              <td>
+                <select class="form-select form-select-sm size-select">
+                  {% for option in [35, 36, 37, 38.5, 39.5, 40, 41, 42, 43, 43.5, 44.5] %}
+                    <option value="{{ option }}" {% if option == item.talla|float %}selected{% endif %}>
+                      {{ option }}
+                    </option>
+                  {% endfor %}
+                </select>
+              </td>
+              <td>
+                <div class="input-group">
+                  <button class="btn btn-outline-secondary btn-decrease" type="button">-</button>
+                  <input type="text" class="form-control text-center quantity-input" 
+                        value="{{ item.cantidad }}" readonly style="max-width: 60px;">
+                  <button class="btn btn-outline-secondary btn-increase" type="button">+</button>
+                </div>
+              </td>
+              <td>$ {{ "{:,.0f}".format(item.producto.precioProducto).replace(",", ".") }}</td>
+              <td class="row-total">
+                $ {{ "{:,.0f}".format(item.cantidad * item.producto.precioProducto).replace(",", ".") }}
+              </td>
+              <td>
+                <form action="{{ url_for('carrito.delete', id=item.idCarrito) }}" method="POST" style="display: inline;">
+                  <button type="submit" class="btn btn-danger" 
+                          onclick="return confirm('¿Seguro que deseas eliminar este producto?');">
+                          <i class="material-icons">delete</i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+        <div class="total-selected-wrapper mt-4 d-flex justify-content-center">
+          <button id="btn-comprar" class="btn-custom">Completar Compra</button>
+          <span id="selected-total" class="total-right">$ 0</span>
+        </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="invoicePreviewModal" tabindex="-1" aria-labelledby="invoicePreviewLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="invoicePreviewLabel">Vista Previa de la Factura</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="invoicePreviewContent">
+                  <!-- Contenido dinámico aquí -->
+                </div>
+                <div class="modal-footer">
+                  <a id="cancelInvoiceLink" href="#" class="btn btn-secondary">Cancelar</a>
+                  <button type="button" class="btn btn-success" id="downloadPdfBtn">Descargar PDF</button>
+                  <button type="button" class="btn btn-primary ms-2" id="continueShoppingBtn">Seguir Comprando</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+        {% else %}
+          <p class="text-center emp ty-cart-message">Tu carrito está vacío 😢</p>
+          <div class="text-center mt-4">
+            <a href="{{ url_for('productos.index') }}" class="seguir-comprando-btn">
+              Explorar Productos
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+    <footer class="footer-custom py-4 mt-5">
+    <div class="container d-flex flex-column flex-md-row justify-content-center align-items-center">
+        <p class="text-white small mb-2 mb-md-0 text-center">
+        © 2024 Palmas. Todos los derechos reservados.
+        </p>
+        <ul class="list-unstyled d-flex mb-0 gap-3 ms-md-4">
+        <li>
+            <a aria-label="Instagram" href="https://www.instagram.com/palmas_clothing_?igsh=YjhibXVsZDdndnd4" class="social-link instagram">
+            <i class="fab fa-instagram fa-lg"></i>
+            </a>
+        </li>
+        <li>
+            <a aria-label="Facebook" href="#" class="social-link facebook">
+            <i class="fab fa-facebook-f fa-lg"></i>
+            </a>
+        </li>
+        <li>
+            <a aria-label="WhatsApp" href="https://wa.me/qr/WHDXLHRASLR3D1" class="social-link whatsapp">
+            <i class="fab fa-whatsapp fa-lg"></i>
+            </a>
+        </li>
+        </ul>
+    </div>
+    </footer>
+
+      <script>
+        // 1) Variables globales
+        let idsSeleccionadosParaFacturar = [];
+        let pdfBase64 = null;
+      
+        // 2) Recalcula selección y total
+        const calcularTotalSeleccionado = () => {
+          let total = 0;
+          idsSeleccionadosParaFacturar = [];
+      
+          document.querySelectorAll('tr[data-id]').forEach(row => {
+            const idCarrito = parseInt(row.dataset.id, 10);
+            const checkbox = row.querySelector('.select-product');
+            if (checkbox.checked) {
+              idsSeleccionadosParaFacturar.push(idCarrito);
+              const qty = parseInt(row.querySelector('.quantity-input').value, 10);
+              const precio = parseFloat(row.dataset.precio);
+              total += qty * precio;
+            }
+          });
+      
+          document.getElementById('selected-total').textContent =
+            '$ ' + total.toLocaleString('de-DE', { maximumFractionDigits: 0 });
+        };
+      
+        // 3) Listeners en checkboxes
+        document.querySelectorAll('.select-product').forEach(chk =>
+          chk.addEventListener('change', calcularTotalSeleccionado)
+        );
+      
+        // 4) Actualización de cantidad y talla, y recalculo
+        document.querySelectorAll('tr[data-id]').forEach(row => {
+          const cartId = row.dataset.id;
+          const precioUnit = parseFloat(row.dataset.precio);
+          const qtyInput = row.querySelector('.quantity-input');
+          const decreaseBtn = row.querySelector('.btn-decrease');
+          const increaseBtn = row.querySelector('.btn-increase');
+          const sizeSelect = row.querySelector('.size-select');
+      
+          // Helper para actualizar la fila
+          const actualizarFila = async () => {
+            const qty = parseInt(qtyInput.value, 10);
+            // Actualiza total en pantalla
+            row.querySelector('.row-total').textContent =
+              '$ ' + (qty * precioUnit).toLocaleString('de-DE', { maximumFractionDigits: 0 });
+            calcularTotalSeleccionado();
+      
+            // Notifica al backend el cambio de cantidad
+            try {
+              await fetch('{{ url_for("carrito.update_cantidad", id=0) }}'.replace('0', cartId), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cantidad: qty })
+              });
+            } catch (e) {
+              console.error('Error actualizando cantidad:', e);
+            }
+          };
+      
+          decreaseBtn.addEventListener('click', () => {
+            let qty = parseInt(qtyInput.value, 10);
+            if (qty > 1) {
+              qtyInput.value = qty - 1;
+              actualizarFila();
+            }
+          });
+      
+          increaseBtn.addEventListener('click', () => {
+            let qty = parseInt(qtyInput.value, 10);
+            qtyInput.value = qty + 1;
+            actualizarFila();
+          });
+      
+          // Cambio de talla
+          sizeSelect.addEventListener('change', async () => {
+            const nuevaTalla = sizeSelect.value;
+            try {
+              const resp = await fetch('{{ url_for("carrito.edit_talla") }}', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idCarrito: cartId, talla: nuevaTalla })
+              });
+              if (!resp.ok) throw new Error('Backend rechazó la talla');
+            } catch (e) {
+              console.error('Error actualizando talla:', e);
+              alert('No se pudo actualizar la talla');
+            }
+          });
+        });
+      
+        // 5) Completar compra → genera factura y muestra modal
+        document.getElementById('btn-comprar').addEventListener('click', async () => {
+          // Aseguramos que idsSeleccionados estén calculados
+          calcularTotalSeleccionado();
+          if (idsSeleccionadosParaFacturar.length === 0) {
+            alert("Selecciona al menos un producto.");
+            return;
+          }
+      
+          // Construye payload
+          const items = idsSeleccionadosParaFacturar.map(idCarrito => {
+            const row = document.querySelector(`tr[data-id="${idCarrito}"]`);
+            return {
+              product_id: parseInt(row.dataset.productoId, 10),
+              cantidad: parseInt(row.querySelector('.quantity-input').value, 10),
+              precio_unitario: parseFloat(row.dataset.precio),
+              producto: row.querySelector('td:nth-child(3)').textContent.trim(),
+              talla: row.querySelector('.size-select').value
+            };
+          });
+      
+          try {
+            const resp = await fetch('{{ url_for("facturacion.comprar") }}', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ items })
+            });
+            if (!resp.ok) throw new Error((await resp.json()).error || resp.statusText);
+            const data = await resp.json();
+            const facturaId = data.factura_id;
+            const deleteUrl = `/facturacion/facturas/delete/${facturaId}`;
+            document.getElementById('cancelInvoiceLink').href = deleteUrl;
+      
+            // Guarda el PDF y construye tabla
+            pdfBase64 = data.pdf_base64;
+            const htmlItems = data.invoice_data.items.map(it => `
+              <tr>
+                <td>${it.producto}</td>
+                <td>${it.talla}</td>
+                <td>${it.cantidad}</td>
+                <td>$${it.precio_unitario.toLocaleString('de-DE')}</td>
+                <td>$${(it.cantidad * it.precio_unitario).toLocaleString('de-DE')}</td>
+              </tr>
+            `).join('');
+      
+            document.getElementById('invoicePreviewContent').innerHTML = `
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Producto</th><th>Talla</th><th>Cantidad</th>
+                    <th>Precio Unitario</th><th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>${htmlItems}</tbody>
+              </table>
+            `;
+      
+            new bootstrap.Modal(document.getElementById('invoicePreviewModal')).show();
+      
+          } catch (e) {
+            console.error('Error en compra:', e);
+            alert("Ocurrió un error durante la compra: “" + e.message + "”");
+          }
+        });
+      
+        // 6) Función para limpiar ítems en backend
+        const limpiarSeleccionados = async (ids) => {
+          try {
+            const resp = await fetch('{{ url_for("carrito.eliminar_seleccionados") }}', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ids_carrito: ids })
+            });
+            return resp.ok;
+          } catch {
+            return false;
+          }
+        };
+      
+        // 7) “Seguir Comprando” limpia y redirige
+        document.getElementById('continueShoppingBtn').addEventListener('click', async () => {
+          const ok = await limpiarSeleccionados(idsSeleccionadosParaFacturar);
+          if (ok) window.location.href = '{{ url_for("productos.index") }}';
+          else alert("No se pudieron limpiar los productos seleccionados");
+        });
+
+        // 8) Descargar PDF limpia y redirige después
+        document.getElementById('downloadPdfBtn').addEventListener('click', async () => {
+          if (!pdfBase64) {
+            alert("No se ha generado el PDF aún.");
+            return;
+          }
+          // Descarga
+          const bin = atob(pdfBase64);
+          const arr = new Uint8Array(bin.length);
+          for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+          const blob = new Blob([arr], { type: 'application/pdf' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = 'factura.pdf';
+          a.click();
+          URL.revokeObjectURL(a.href);
+
+          // Limpia y redirige
+          const ok = await limpiarSeleccionados(idsSeleccionadosParaFacturar);
+          setTimeout(() => {
+            if (ok) window.location.href = '{{ url_for("productos.index") }}';
+            else alert("No se pudieron limpiar los productos seleccionados");
+          }, 500);
+        });
+
+        document.getElementById('select-all').addEventListener('change', function () {
+          const checkboxes = document.querySelectorAll('.select-product');
+          checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+          });
+          calcularTotalSeleccionado(); // Actualiza el total
+        });
+        
+        function actualizarContadorCarrito() {
+          const cartCount = document.getElementById('cart-count');
+          if (cartCount) {
+            // Contar filas de productos en el carrito
+            const filasCarrito = document.querySelectorAll('tbody tr');
+            cartCount.textContent = filasCarrito.length;
+            
+            // Ocultar el contador si no hay productos
+            cartCount.style.display = filasCarrito.length > 0 ? 'inline-block' : 'none';
+          }
+        }
+
+        // Llamar a la función cuando se carga la página
+        document.addEventListener('DOMContentLoaded', actualizarContadorCarrito);
+      </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>

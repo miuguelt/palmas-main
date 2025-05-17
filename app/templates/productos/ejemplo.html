@@ -1,0 +1,479 @@
+<html class="scroll-smooth" lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Tienda de Zapatos
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-gray-50 min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="bg-blue-700 text-white shadow-md">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+     <div class="flex items-center space-x-6">
+      <a class="flex items-center space-x-2 text-white hover:text-blue-300" href="#">
+       <i class="fas fa-shoe-prints fa-lg">
+       </i>
+       <span class="font-bold text-xl select-none">
+        Zapatería
+       </span>
+      </a>
+      <a class="hover:text-blue-300 flex items-center space-x-1" href="#">
+       <i class="fas fa-home">
+       </i>
+       <span>
+        Inicio
+       </span>
+      </a>
+      <a class="hover:text-blue-300 flex items-center space-x-1" href="#">
+       <i class="fas fa-th-large">
+       </i>
+       <span>
+        Productos
+       </span>
+      </a>
+      <a class="hover:text-blue-300 flex items-center space-x-1" href="#">
+       <i class="fas fa-info-circle">
+       </i>
+       <span>
+        Nosotros
+       </span>
+      </a>
+      <a class="hover:text-blue-300 flex items-center space-x-1" href="#">
+       <i class="fas fa-phone-alt">
+       </i>
+       <span>
+        Contacto
+       </span>
+      </a>
+     </div>
+     <div class="flex items-center space-x-6">
+      <a class="relative hover:text-blue-300" href="#">
+       <i class="fas fa-shopping-cart fa-lg">
+       </i>
+       <span class="absolute -top-2 -right-3 bg-red-600 text-xs rounded-full px-1.5 font-semibold">
+        3
+       </span>
+      </a>
+      <li class="nav-item">
+        <a href="{{ url_for('auth.logout') }}" class="btn btn-danger d-flex align-items-center flex-nowrap">
+          <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+        </a>
+      </li>
+     </div>
+    </div>
+   </div>
+  </nav>
+  <!-- Carousel -->
+  <section class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 w-full">
+   <div class="relative w-full overflow-hidden rounded-lg shadow-lg">
+    <div class="carousel relative w-full h-64 sm:h-96">
+     <div class="carousel-inner relative w-full h-full overflow-hidden rounded-lg">
+      <input aria-hidden="true" checked="" class="carousel-open" hidden="" id="carousel-1" name="carousel" type="radio"/>
+      <div class="carousel-item absolute opacity-0" style="transition: opacity 0.5s ease-in-out;">
+       <img alt="Zapatos deportivos rojos en acción, con fondo urbano y dinámico" class="w-full h-full object-cover rounded-lg" height="400" src="https://storage.googleapis.com/a1aa/image/1a66c0f7-1266-44ea-8211-8626b7faa561.jpg" width="1200"/>
+      </div>
+      <input aria-hidden="true" class="carousel-open" hidden="" id="carousel-2" name="carousel" type="radio"/>
+      <div class="carousel-item absolute opacity-0" style="transition: opacity 0.5s ease-in-out;">
+       <img alt="Zapatos formales negros elegantes sobre una superficie de madera clara" class="w-full h-full object-cover rounded-lg" height="400" src="https://storage.googleapis.com/a1aa/image/4bcc7aa9-ecef-4a56-a59f-46dbeded0e96.jpg" width="1200"/>
+      </div>
+      <input aria-hidden="true" class="carousel-open" hidden="" id="carousel-3" name="carousel" type="radio"/>
+      <div class="carousel-item absolute opacity-0" style="transition: opacity 0.5s ease-in-out;">
+       <img alt="Zapatos casuales blancos colocados en un entorno exterior natural con césped" class="w-full h-full object-cover rounded-lg" height="400" src="https://storage.googleapis.com/a1aa/image/8fc8d6f8-7d5f-463b-28a6-6e33fb9641b9.jpg" width="1200"/>
+      </div>
+      <!-- Carousel controls -->
+      <label class="prev control absolute left-0 top-1/2 transform -translate-y-1/2 cursor-pointer text-white text-3xl px-4 select-none hover:text-blue-300 z-10" for="carousel-3">
+       ‹
+      </label>
+      <label class="next control absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer text-white text-3xl px-4 select-none hover:text-blue-300 z-10" for="carousel-2">
+       ›
+      </label>
+      <label class="prev control absolute left-0 top-1/2 transform -translate-y-1/2 cursor-pointer text-white text-3xl px-4 select-none hover:text-blue-300 z-10" for="carousel-1">
+       ‹
+      </label>
+      <label class="next control absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer text-white text-3xl px-4 select-none hover:text-blue-300 z-10" for="carousel-3">
+       ›
+      </label>
+      <label class="prev control absolute left-0 top-1/2 transform -translate-y-1/2 cursor-pointer text-white text-3xl px-4 select-none hover:text-blue-300 z-10" for="carousel-2">
+       ‹
+      </label>
+      <label class="next control absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer text-white text-3xl px-4 select-none hover:text-blue-300 z-10" for="carousel-1">
+       ›
+      </label>
+      <!-- Carousel indicators -->
+      <ol class="carousel-indicators flex justify-center space-x-3 absolute bottom-4 left-0 right-0 z-20">
+       <li>
+        <label class="carousel-bullet cursor-pointer block text-2xl text-white hover:text-blue-300" for="carousel-1">
+         •
+        </label>
+       </li>
+       <li>
+        <label class="carousel-bullet cursor-pointer block text-2xl text-white hover:text-blue-300" for="carousel-2">
+         •
+        </label>
+       </li>
+       <li>
+        <label class="carousel-bullet cursor-pointer block text-2xl text-white hover:text-blue-300" for="carousel-3">
+         •
+        </label>
+       </li>
+      </ol>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- Productos -->
+  <main class="max-w-7xl mx-auto mt-10 px-4 sm:px-6 lg:px-8 flex-grow">
+   <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+    Nuestros Productos
+   </h2>
+   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato deportivo rojo con detalles blancos, diseño moderno y suela blanca" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/6757c168-7c6d-4af1-d62c-f9924f3ac526.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato Deportivo Rojo
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Cómodo y ligero, ideal para correr y entrenar.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,200 MXN
+       </span>
+       <button aria-label="Agregar Zapato Deportivo Rojo al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato formal negro de cuero brillante con cordones y suela elegante" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/8e765075-3c5c-4ecd-5f58-4551cb0c3c02.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato Formal Negro
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Perfecto para eventos y oficina, elegante y cómodo.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,800 MXN
+       </span>
+       <button aria-label="Agregar Zapato Formal Negro al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato casual blanco de cuero suave con diseño minimalista y suela beige" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/5fcac8c2-a55f-44ee-3960-86cd75e05740.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato Casual Blanco
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Ideal para el día a día, cómodo y versátil.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,100 MXN
+       </span>
+       <button aria-label="Agregar Zapato Casual Blanco al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Botín de cuero marrón con cordones y suela robusta para uso casual y semi formal" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/f65cdb7f-e4cb-470f-aa32-29b57b0d7989.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Botín Marrón de Cuero
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Duradero y con estilo, perfecto para otoño e invierno.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,500 MXN
+       </span>
+       <button aria-label="Agregar Botín Marrón de Cuero al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Sandalia de verano con correas azules y suela cómoda para uso diario" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/8b05de1c-96da-40f3-2c6a-e898fb06e6e1.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Sandalia Azul de Verano
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Fresca y ligera, ideal para días calurosos y casuales.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $900 MXN
+       </span>
+       <button aria-label="Agregar Sandalia Azul de Verano al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Tenis blancos con detalles negros y suela deportiva para uso casual y deportivo" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/0222b6c4-607b-4de5-c6f1-301f1ca642bd.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Tenis Blancos con Detalles Negros
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Versátiles y modernos, para cualquier ocasión casual.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,300 MXN
+       </span>
+       <button aria-label="Agregar Tenis Blancos con Detalles Negros al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato de fiesta con brillos plateados y tacón alto elegante para eventos especiales" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/205bdc6b-c55a-4f5a-83da-1d7936382d25.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato de Fiesta Plateado
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Brillante y sofisticado, para destacar en cualquier evento.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $2,200 MXN
+       </span>
+       <button aria-label="Agregar Zapato de Fiesta Plateado al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato de niño azul con cierre de velcro y suela flexible para comodidad infantil" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/d8e8f191-4007-4441-122d-3d79add5332b.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato Infantil Azul
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Cómodo y seguro, ideal para los primeros pasos de los niños.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $700 MXN
+       </span>
+       <button aria-label="Agregar Zapato Infantil Azul al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato de senderismo gris con suela antideslizante y diseño robusto para exteriores" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/dc9b1e2f-c0f7-4ce4-39b2-075fa64a4d8c.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato de Senderismo Gris
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Resistente y cómodo para aventuras al aire libre.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,900 MXN
+       </span>
+       <button aria-label="Agregar Zapato de Senderismo Gris al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato de baile negro con brillo y tacón bajo para comodidad y estilo" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/719ddaa9-305a-4234-a1f6-e99b295c181a.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato de Baile Negro
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Elegante y cómodo para bailar toda la noche.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,600 MXN
+       </span>
+       <button aria-label="Agregar Zapato de Baile Negro al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato de plataforma beige con correas anchas y tacón alto para estilo y comodidad" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/521d387f-8834-4c00-c970-657a2acc8a0a.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato de Plataforma Beige
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Perfecto para un look moderno y cómodo a la vez.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,750 MXN
+       </span>
+       <button aria-label="Agregar Zapato de Plataforma Beige al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato de tenis negro con suela blanca y diseño deportivo para uso diario" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/01e6d0fa-8ab1-43b8-9799-f245a0a7cbda.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato de Tenis Negro
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Clásico y cómodo, ideal para cualquier actividad casual.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,250 MXN
+       </span>
+       <button aria-label="Agregar Zapato de Tenis Negro al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato de cuero blanco con detalles azules y suela resistente para uso casual" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/f8614a2e-838e-4478-e949-6fce38024a59.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato de Cuero Blanco
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Estilo y comodidad para el día a día con un toque de color.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,400 MXN
+       </span>
+       <button aria-label="Agregar Zapato de Cuero Blanco al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+     <img alt="Zapato de running azul con suela amortiguadora y diseño aerodinámico para alto rendimiento" class="w-full h-48 object-cover" height="300" src="https://storage.googleapis.com/a1aa/image/8e4946fc-f0fc-4bc3-ecad-b33f0c3fb28c.jpg" width="400"/>
+     <div class="p-4 flex flex-col flex-grow">
+      <h3 class="text-lg font-semibold text-gray-900 mb-2">
+       Zapato de Running Azul
+      </h3>
+      <p class="text-gray-700 flex-grow">
+       Tecnología avanzada para máxima comodidad y rendimiento.
+      </p>
+      <div class="mt-4 flex items-center justify-between">
+       <span class="text-blue-700 font-bold text-lg">
+        $1,600 MXN
+       </span>
+       <button aria-label="Agregar Zapato de Running Azul al carrito" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 transition">
+        <i class="fas fa-cart-plus">
+        </i>
+       </button>
+      </div>
+     </div>
+    </article>
+   </div>
+  </main>
+  <footer class="bg-blue-700 text-white text-center py-6 mt-12">
+   <p class="text-sm">
+    © 2024 Zapatería. Todos los derechos reservados.
+   </p>
+  </footer>
+  <script>
+   // Carousel functionality
+    const items = document.querySelectorAll('.carousel-item');
+    const radios = document.querySelectorAll('.carousel-open');
+    let current = 0;
+
+    function showSlide(index) {
+      items.forEach((item, i) => {
+        item.style.opacity = i === index ? '1' : '0';
+        radios[i].checked = i === index;
+      });
+      current = index;
+    }
+
+    function nextSlide() {
+      let next = current + 1;
+      if (next >= items.length) next = 0;
+      showSlide(next);
+    }
+
+    function prevSlide() {
+      let prev = current - 1;
+      if (prev < 0) prev = items.length - 1;
+      showSlide(prev);
+    }
+
+    // Attach event listeners to controls
+    const controlsPrev = document.querySelectorAll('.prev.control');
+    const controlsNext = document.querySelectorAll('.next.control');
+
+    controlsPrev.forEach((control) =>
+      control.addEventListener('click', (e) => {
+        e.preventDefault();
+        prevSlide();
+      })
+    );
+
+    controlsNext.forEach((control) =>
+      control.addEventListener('click', (e) => {
+        e.preventDefault();
+        nextSlide();
+      })
+    );
+
+    // Auto slide every 5 seconds
+    setInterval(nextSlide, 5000);
+
+    // Initialize
+    showSlide(0);
+  </script>
+ </body>
+</html>

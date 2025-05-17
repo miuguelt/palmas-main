@@ -1,0 +1,177 @@
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+/* Botones */
+.btn-add {
+  border-radius: 50px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+}
+.btn-edit,
+.btn-delete {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+/* Tabla personalizada */
+.table-custom thead {
+  background-color: #2a9d8f;
+}
+.table-custom th,
+.table-custom td {
+  vertical-align: middle;
+  border-color: #e9ecef;
+}
+.table-custom tbody tr:hover {
+  background-color: #f1f7f6;
+}
+/* Modal Headers */
+.modal-header {
+  background-color: #007BFF;
+  color: #fff;
+  border-bottom: none;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+/* Form Floating Labels */
+.form-floating > .form-control:focus ~ label {
+  opacity: 0.65;
+  transform: scale(0.9) translateY(-1.5rem);
+}
+
+.nav-link {
+  position: relative;
+}
+
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 10px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  padding: 0;
+  display: none; /* Oculto por defecto */
+}
+/* ===============================
+ADMIN ACTIONS
+=============================== */
+.admin-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 14px;
+}
+
+.admin-actions a {
+    color: #007bff;
+    font-size: 1.4rem;
+    transition: color 0.3s ease;
+}
+
+.admin-actions a:hover {
+    color: #0056b3;
+}
+
+/* ===============================
+NAVBAR
+=============================== */
+.navbar {
+    background-color: #007bff !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding: 0.5rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 6px;
+}
+
+/* Fix for logout button to prevent line break */
+.navbar .nav-item > a.btn.btn-danger {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 12px;
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link:focus {
+    background-color: rgba(255,255,255,0.2);
+    color: #fff !important;
+    outline: none;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu {
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: none;
+    padding: 0.5rem 0;
+    min-width: 200px;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu li a.dropdown-item {
+    color: #333;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu li a.dropdown-item:hover,
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu li a.dropdown-item:focus {
+    background-color: #0056b3;
+    color: #fff;
+    outline: none;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu li a.dropdown-item .badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background-color: #dc3545;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 12px;
+    margin-left: 8px;
+}
+
+/* Cart icon and badge */
+.navbar .nav-link i.material-icons {
+    font-size: 1.6rem;
+    position: relative;
+    margin-right: 0; /* Remove any margin to stick badge closer */
+}
+#cart-count {
+    position: relative; /* Changed from absolute to relative for inline flow */
+    top: 0;
+    right: 0;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 11px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #dc3545;
+    color: white;
+    padding: 0 4px;
+    display: inline-block;
+    margin-left: 2px; /* small gap from icon */
+    vertical-align: middle;
+}

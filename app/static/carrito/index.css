@@ -1,0 +1,469 @@
+.product-image {
+    width: 100%;
+    max-width: 150px; /* Imagen ampliada */
+    height: auto;
+    border-radius: 8px;
+  }
+  /* Estilo base para botones minimalistas */
+  .minimalist-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 20px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .minimalist-button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+  }
+  /* Estilos para la tabla minimalista */
+  .table {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+  .table th, .table td {
+    vertical-align: middle;
+    padding: 12px 15px;
+    border: none;
+  }
+  .table thead {
+    background-color: #f1f1f1;
+  }
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+  }
+  /* Estilos para la columna de selección */
+  .table thead th.select-col,
+  .table tbody td.select-col {
+    text-align: center;
+    width: 80px;
+  }
+  .select-product {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+  /* Botón "Seguir Comprando" en estilo minimalista, gris y ovalado */
+  .seguir-comprando-btn {
+    background-color: #6c757d;  /* Gris */
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;  /* Forma ovalada */
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  .seguir-comprando-btn:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+  }
+/* Estilo para el contenedor de total seleccionado */
+.total-selected-wrapper {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #0d6efd;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  position: relative; /* Para posicionar el total */
+}
+
+/* Alineación del botón al centro */
+.btn-custom {
+  background-color: white; /* Verde vibrante */
+  color: rgb(0, 0, 0);
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,0.1);
+}
+
+.btn-custom:hover {
+  color: rgb(255, 255, 255);
+  background-color: #218838; /* Verde oscuro al pasar el mouse */
+  transform: translateY(-2px);
+  box-shadow: inset 0 -3px 0 rgba(248, 248, 248, 0.2), 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* Posicionamiento del total a la derecha */
+.total-right {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+  .header, .footer {
+    background-color: #007bff; /* Azul para el encabezado y pie */
+    color: #fff; /* Texto blanco */
+    padding: 16px; /* Espaciado interno */
+    text-align: center; /* Alineación centrada */
+  }
+  .header a, .footer a {
+    margin: 0 8px; /* Espaciado entre enlaces */
+    text-decoration: none; /* Sin subrayado */
+    color: #fff; /* Texto blanco */
+  }
+  .header a:hover, .footer a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+  }
+  .select-col input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+
+.product-image {
+    width: 100%;
+    max-width: 150px; /* Imagen ampliada */
+    height: auto;
+    border-radius: 8px;
+  }
+  /* Estilo base para botones minimalistas */
+  .minimalist-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 20px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .minimalist-button:hover {
+    background-color: #555;
+    transform: scale(1.05);
+  }
+  /* Estilos para la tabla minimalista */
+  .table {
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+  .table th, .table td {
+    vertical-align: middle;
+    padding: 12px 15px;
+    border: none;
+  }
+  .table thead {
+    background-color: #f1f1f1;
+  }
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+  }
+  /* Estilos para la columna de selección */
+  .table thead th.select-col,
+  .table tbody td.select-col {
+    text-align: center;
+    width: 80px;
+  }
+  .select-product {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+  /* Botón "Seguir Comprando" en estilo minimalista, gris y ovalado */
+  .seguir-comprando-btn {
+    background-color: #6c757d;  /* Gris */
+    color: #fff;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 50px;  /* Forma ovalada */
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  .seguir-comprando-btn:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+  }
+  /* Estilo para el contenedor de total seleccionado */
+  .total-selected-wrapper {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative; /* Para posicionar el total */
+  }
+  /* Alineación del botón al centro */
+  .btn-custom {
+    background-color: white; /* Verde vibrante */
+    color: rgb(0, 0, 0);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,0.1);
+  }
+  .btn-custom:hover {
+    color: rgb(255, 255, 255);
+    background-color: #218838; /* Verde oscuro al pasar el mouse */
+    transform: translateY(-2px);
+    box-shadow: inset 0 -3px 0 rgba(248, 248, 248, 0.2), 0 2px 5px rgba(0,0,0,0.15);
+  }
+  /* Posicionamiento del total a la derecha */
+  .total-right {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .header, .footer {
+    background-color: #007bff; /* Azul para el encabezado y pie */
+    color: #fff; /* Texto blanco */
+    padding: 16px; /* Espaciado interno */
+    text-align: center; /* Alineación centrada */
+  }
+  .header a, .footer a {
+    margin: 0 8px; /* Espaciado entre enlaces */
+    text-decoration: none; /* Sin subrayado */
+    color: #fff; /* Texto blanco */
+  }
+  .header a:hover, .footer a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+  }
+  .select-col input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  #cart-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    padding: 0;
+    display: inline-block;
+  }
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ===============================
+ADMIN ACTIONS
+=============================== */
+.admin-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 14px;
+}
+
+.admin-actions a {
+    color: #007bff;
+    font-size: 1.4rem;
+    transition: color 0.3s ease;
+}
+
+.admin-actions a:hover {
+    color: #0056b3;
+}
+
+/* ===============================
+NAVBAR
+=============================== */
+.navbar {
+    background-color: #007bff !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding: 0.5rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 6px;
+}
+
+/* Fix for logout button to prevent line break */
+.navbar .nav-item > a.btn.btn-danger {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding: 0 12px;
+}
+
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link:focus {
+    background-color: rgba(255,255,255,0.2);
+    color: #fff !important;
+    outline: none;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu {
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: none;
+    padding: 0.5rem 0;
+    min-width: 200px;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu li a.dropdown-item {
+    color: #333;
+    font-weight: 500;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu li a.dropdown-item:hover,
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu li a.dropdown-item:focus {
+    background-color: #0056b3;
+    color: #fff;
+    outline: none;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu li a.dropdown-item .badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    background-color: #dc3545;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 12px;
+    margin-left: 8px;
+}
+
+/* Cart icon and badge */
+.navbar .nav-link i.material-icons {
+    font-size: 1.6rem;
+    position: relative;
+    margin-right: 0; /* Remove any margin to stick badge closer */
+}
+#cart-count {
+    position: relative; /* Changed from absolute to relative for inline flow */
+    top: 0;
+    right: 0;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    font-size: 11px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #dc3545;
+    color: white;
+    padding: 0 4px;
+    display: inline-block;
+    margin-left: 2px; /* small gap from icon */
+    vertical-align: middle;
+}
+.footer-custom {
+  width: 100%;
+  background-color: #007bff;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+
+/* Contenedor centrado y responsivo */
+.footer-custom .container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* Texto */
+.footer-custom p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #fff !important;
+}
+
+/* Iconos sociales */
+.social-link {
+  color: rgba(255,255,255,0.85);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.social-link:hover {
+  transform: translateY(-2px);
+}
+.social-link.instagram:hover { color: #E4405F; }
+.social-link.facebook:hover  { color: #4267B2; }
+.social-link.whatsapp:hover  { color: #25D366; }
+
+/* Apilar y centrar en móvil */
+@media (max-width: 767px) {
+  .footer-custom .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-custom ul {
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+}
