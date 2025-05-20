@@ -2,8 +2,8 @@
 set -e
 
 # Rutas
-HOST_DIR="/app/app/static"      # Archivos iniciales en el contenedor
-CONTAINER_DIR="/2826869/alejandro"  # Volumen montado desde el host
+HOST_DIR="/2826869/alejandro"      
+CONTAINER_DIR="/app/app/static"  
 
 
 # Crea enlaces simbólicos o copia archivos para que la app use HOST_DIR
