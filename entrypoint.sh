@@ -2,8 +2,8 @@
 set -e
 
 # Rutas
-APP_DATA_DIR="/2826869/alejandro"      # Archivos iniciales en el contenedor
-VOLUME_DIR="/app/app/static"  # Volumen montado desde el host
+APP_DATA_DIR="/app/app/static"      # Archivos iniciales en el contenedor
+VOLUME_DIR="/2826869/alejandro"  # Volumen montado desde el host
 
 # Verifica si el volumen está vacío
 if [ -d "$VOLUME_DIR" ] && [ "$(ls -A $VOLUME_DIR)" ]; then
