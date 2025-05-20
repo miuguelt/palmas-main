@@ -12,6 +12,7 @@ EXPOSE 8080
 COPY entrypoint.sh /usr/local/bin/ 
 
 RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 CMD [ "python", "run.py" ]
 #CMD sh -c "gunicorn --bind 0.0.0.0:8081 --workers 4 --forwarded-allow-ips=*  wsgi:app"
