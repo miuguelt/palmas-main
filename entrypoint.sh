@@ -2,7 +2,7 @@
 set -e
 
 # Rutas
-HOST_DIR="/2826869/alejandro"      # Archivos iniciales en el contenedor
+HOST_DIR="/app/app/static"      # Archivos iniciales en el contenedor
 CONTAINER_DIR="/2826869/alejandro"  # Volumen montado desde el host
 
 

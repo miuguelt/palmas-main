@@ -8,11 +8,8 @@ RUN pip install --default-timeout=100 --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 8080
 
-# Copia el script de inicialización
-COPY entrypoint.sh /usr/local/bin/ 
-
-RUN chmod +x /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
 
 CMD [ "python", "run.py" ]
 #CMD sh -c "gunicorn --bind 0.0.0.0:8081 --workers 4 --forwarded-allow-ips=*  wsgi:app"
