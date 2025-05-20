@@ -9,3 +9,5 @@ services:
       - DB_HOST=$DB_HOST
       - DB_PORT=$DB_PORT
       - DB_NAME=$DB_NAME
+    volumes:
+      - /2826869/alejandro:/app/app/static
