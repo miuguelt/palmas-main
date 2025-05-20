@@ -9,11 +9,9 @@ COPY . .
 EXPOSE 8080
 
 # Copia el script de inicialización
-COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/ 
 
-# Establece el entrypoint
-ENTRYPOINT ["entrypoint.sh"]
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 CMD [ "python", "run.py" ]
 #CMD sh -c "gunicorn --bind 0.0.0.0:8081 --workers 4 --forwarded-allow-ips=*  wsgi:app"
