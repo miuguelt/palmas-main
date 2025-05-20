@@ -8,6 +8,8 @@ RUN pip install --default-timeout=100 --no-cache-dir -r requirements.txt
 COPY . .
 EXPOSE 8080
 
+RUN mkdir -p /initial_static && cp -r /app/app/static/. /initial_static/
+
 
 RUN chmod +x /app/entrypoint.sh
 ENTRYPOINT ["/app/entrypoint.sh"]
