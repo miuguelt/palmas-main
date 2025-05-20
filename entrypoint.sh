@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+# Paths\ n
+STATIC_DIR="/app/app/static"
 INITIAL_DIR="/initial_static"
 
 # If host static is empty, first initialization
