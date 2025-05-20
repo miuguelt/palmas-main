@@ -4,34 +4,31 @@ set -e
 # Rutas
 HOST_DIR="/2826869/alejandro"      
 CONTAINER_DIR="/app/app/static"  
+INITIAL_FILES_DIR="/app/app/initial_files"
 
-
-# Crea enlaces simbólicos o copia archivos para que la app use HOST_DIR
-ln -s "$HOST_DIR" "$CONTAINER_DIR"
-
-# Si HOST_DIR no existe, intenta crearla (esto fallará si el usuario no tiene permisos en el host)
+# Create/mount the host directory if it doesn't exist
 if [ ! -d "$HOST_DIR" ]; then
-    echo "La carpeta $HOST_DIR no existe en el host. Esto causará un error en el contenedor."
-    echo "Por favor, crea la carpeta manualmente o usa un script de inicialización en el host."
-    exit 1
+  mkdir -p "$HOST_DIR"
 fi
 
-# Si la carpeta está vacía, copia archivos iniciales
-if [ "$(ls -A "$HOST_DIR")" = "" ]; then
-    echo "Carpeta del host vacía. Copiando archivos iniciales..."
-    cp -r /initial_files/* "$HOST_DIR/"
+# Create target data directory in container
+if [ ! -d "$CONTAINER_DIR" ]; then
+  mkdir -p "$CONTAINER_DIR"
+fi
+
+# Symlink host directory into container path if not already
+if [ ! -L "$CONTAINER_DIR/data" ]; then
+  # Remove any existing files and create link
+  rm -rf "$CONTAINER_DIR"
+  ln -s "$HOST_DIR" "$CONTAINER_DIR"
+fi
+
+# If host directory is empty, copy initial files
+if [ -z "$(ls -A "$HOST_DIR")" ]; then
+  echo "[entrypoint] Host data empty, copying initial files..."
+  cp -r "$INITIAL_FILES_DIR/." "$HOST_DIR/"
 else
-    echo "Carpeta del host no vacía. Fusionando archivos nuevos del contenedor..."
-    
-    # Copia solo archivos nuevos (sin sobreescribir)
-    find /initial_files -type f -exec sh -c '
-        for file; do
-            base=$(basename "$file")
-            if [ ! -f "$HOST_DIR/$base" ]; then
-                cp "$file" "$HOST_DIR/$base"
-            fi
-        done
-    ' sh {} +
+  echo "[entrypoint] Host data found, skipping initial copy."
 fi
 
 # Asegura permisos (ajusta según el usuario del contenedor)
